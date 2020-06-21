@@ -42,3 +42,4 @@ server/config/dev.ts
 
 # ignore yarheroku logs --tailn.lock
 yarn.lock
+/dist
