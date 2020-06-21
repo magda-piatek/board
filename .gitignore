@@ -38,6 +38,8 @@ Thumbs.db
 # Ignore built ts files
 
 server/config/dev.ts
+server/dist/**
+client/dist/**
 
 
 # ignore yarheroku logs --tailn.lock
