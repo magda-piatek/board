@@ -3,7 +3,6 @@ import {useState} from 'react'
 import axios from 'axios'
 import {useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {setAuth} from '../store/actions/authAction'
 import {
   Button,
   CssBaseline,
@@ -11,6 +10,8 @@ import {
   Grid,
   Container,
 } from '@material-ui/core'
+
+import {setAuth} from '../store/actions/authAction'
 import {loginApi} from '../services/api'
 import {findError} from '../utils/Helpers'
 

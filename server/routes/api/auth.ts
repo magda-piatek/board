@@ -1,4 +1,4 @@
-import {Request, Response} from 'express'
+import {Response} from 'express'
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
@@ -6,14 +6,11 @@ import bcrypt from 'bcryptjs'
 import auth from '../../middleware/auth'
 import User from '../../models/User'
 import {keys} from '../../config/keys'
+import {IRequest} from '../../interfaces'
 
 const jwtSecret = keys.jwtSecret
 const router = express.Router()
 const {check, validationResult, body} = require('express-validator')
-
-interface IRequest extends Request {
-  user: string
-}
 
 router.get('/', auth, async (req: IRequest, res: Response) => {
   try {

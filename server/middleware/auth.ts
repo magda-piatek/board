@@ -1,10 +1,8 @@
-import {keys} from '../config/keys'
-
 import {Request, Response, NextFunction} from 'express'
 import jwt from 'jsonwebtoken'
-interface IRequest extends Request {
-  user: string
-}
+
+import {keys} from '../config/keys'
+import {IRequest} from '../interfaces'
 
 export default (req: IRequest, res: Response, next: NextFunction) => {
   const token = req.header('x-auth-token')

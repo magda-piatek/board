@@ -1,4 +1,4 @@
-export function getHeaders() {
+export const getHeaders = () => {
   return {
     'Content-Type': 'application/json',
   }

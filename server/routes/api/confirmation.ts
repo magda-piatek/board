@@ -1,6 +1,7 @@
 import {Request, Response} from 'express'
 import jwt from 'jsonwebtoken'
 import express from 'express'
+
 import User from '../../models/User'
 import {keys} from '../../config/keys'
 
