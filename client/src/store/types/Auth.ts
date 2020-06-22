@@ -1,5 +1,4 @@
 export interface Auth {
-  token: String
-  isAuthenticated: Boolean
-  loading: Boolean
+  token: string
+  isAuthenticated: boolean
 }

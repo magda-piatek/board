@@ -25,6 +25,7 @@ const LoginForm = (props: any) => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setFormData({...formData, [e.target.name]: e.target.value})
+
   const dispatch = useDispatch()
 
   const handleSubmit = async (
@@ -35,19 +36,13 @@ const LoginForm = (props: any) => {
     try {
       const res = await axios.post(loginApi().post, {email, password})
 
-      dispatch(
-        setAuth({token: res.data.token, isAuthenticated: true, loading: false})
-      )
+      dispatch(setAuth({token: res.data.token, isAuthenticated: true}))
 
       props.history.push('/dashboard')
     } catch (err) {
       setErrors(err.response.data.errors)
     }
   }
-
-  console.log('====================================')
-  console.log(errors)
-  console.log('====================================')
 
   return (
     <Container component="main" maxWidth="xs">

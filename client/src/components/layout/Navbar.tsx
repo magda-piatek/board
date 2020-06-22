@@ -1,25 +1,23 @@
 import * as React from 'react'
-import {makeStyles} from '@material-ui/core/styles'
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-  Grid,
-} from '@material-ui/core'
+import {AppBar, Button, Grid} from '@material-ui/core'
+import {useDispatch} from 'react-redux'
 
-const Blayout = (props: any) => {
-  console.log('====================================')
-  console.log(props)
-  console.log('====================================')
+import {setAuth} from '../../store/actions/authAction'
+
+const Navbar = (props: any) => {
+  const dispatch = useDispatch()
+
+  const handleLogOut = () => {
+    dispatch(setAuth({token: null, isAuthenticated: false}))
+    props.history.push('/')
+  }
   return (
     <AppBar position="static">
-      <Grid spacing={8} item xs={4}>
-        <Button>LOG OUT</Button>
+      <Grid item xs={4}>
+        <Button onClick={handleLogOut}>LOG OUT</Button>
       </Grid>
     </AppBar>
   )
 }
 
-export default Blayout
+export default Navbar

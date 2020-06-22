@@ -14,18 +14,6 @@ const transporter = nodemailer.createTransport({
 })
 
 export default (to: string, subject: string, content: string) => {
-  console.log('====================================')
-  console.log({
-    host: 'smtp.gmail.com',
-    service: 'Gmail',
-    port: 465,
-    secure: true,
-    auth: {
-      user: keys.user,
-      pass: keys.pass,
-    },
-  })
-  console.log('====================================')
   let options = {
     from: keys.user,
     to: to,

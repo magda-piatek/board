@@ -1,5 +1,5 @@
 export const findError = (
-  errors: Array<{location: String; msg: String; param: String; value: String}>,
+  errors: Array<{location: string; msg: string; param: string; value: string}>,
   name: string
 ) => {
   return (

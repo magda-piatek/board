@@ -7,6 +7,7 @@ export interface IUserSchema extends Document {
   password: string
   date: Date
   confirmed: boolean
+  image: object
 }
 
 const UserSchema = new Schema({
@@ -34,6 +35,9 @@ const UserSchema = new Schema({
   confirmed: {
     type: Boolean,
     default: false,
+  },
+  avatar: {
+    type: Object,
   },
 })
 

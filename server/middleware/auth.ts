@@ -1,17 +1,18 @@
+import {keys} from '../config/keys'
+
 import {Request, Response, NextFunction} from 'express'
 import jwt from 'jsonwebtoken'
-import config from 'config'
-interface ICustomRequest extends Request {
+interface IRequest extends Request {
   user: string
 }
 
-export default (req: ICustomRequest, res: Response, next: NextFunction) => {
+export default (req: IRequest, res: Response, next: NextFunction) => {
   const token = req.header('x-auth-token')
 
   if (!token) res.status(401).json({msg: 'No token, authorization denied'})
 
   try {
-    const decoded = <any>jwt.verify(token, 'jfsdhfjshksh')
+    const decoded = <any>jwt.verify(token, keys.secretJWT)
 
     req.user = decoded.user.id
 

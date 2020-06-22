@@ -5,7 +5,6 @@ import {Auth} from '../types/Auth'
 const initialState: Auth = {
   token: '',
   isAuthenticated: false,
-  loading: false,
 }
 
 export default (state = initialState, action: ActionTypes): Auth => {

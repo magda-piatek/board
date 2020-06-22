@@ -11,11 +11,11 @@ const jwtSecret = keys.jwtSecret
 const router = express.Router()
 const {check, validationResult, body} = require('express-validator')
 
-interface ICustomRequest extends Request {
+interface IRequest extends Request {
   user: string
 }
 
-router.get('/', auth, async (req: ICustomRequest, res: Response) => {
+router.get('/', auth, async (req: IRequest, res: Response) => {
   try {
     const user = await User.findById(req.user).select('-password')
     res.json(user)
@@ -45,9 +45,7 @@ router.post(
     const {email, password} = req.body
     try {
       let user = await User.findOne({email})
-      console.log('====================================')
-      console.log(user)
-      console.log('====================================')
+
       if (user && !user.confirmed)
         res
           .status(400)

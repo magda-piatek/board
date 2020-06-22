@@ -3,7 +3,7 @@ import Blayout from '../components/Blayout'
 
 const Lading = (props: any) => {
   return (
-    <Blayout props={props}>
+    <Blayout {...props}>
       <div />
     </Blayout>
   )

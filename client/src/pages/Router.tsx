@@ -5,6 +5,7 @@ import LoginPage from './LoginPage'
 import RegistrationPage from './RegistrationPage'
 
 import Landing from './Landing'
+import PrivateRoute from '../services/PrivateRoute'
 
 const Router = () => {
   return (
@@ -12,7 +13,7 @@ const Router = () => {
       <Switch>
         <Route exact path="/" component={LoginPage} />
         <Route exact path="/registration" component={RegistrationPage} />
-        <Route exact path="/dashboard" component={Landing} />
+        <PrivateRoute path="/dashboard" exact component={Landing} />
       </Switch>
     </BrowserRouter>
   )

@@ -1,19 +1,23 @@
 import express from 'express'
-import User from '../../models/User'
 import bcrypt from 'bcryptjs'
 import {Request} from 'express'
-import {keys} from '../../config/keys'
 import jwt from 'jsonwebtoken'
+
+import User from '../../models/User'
 import sendMail from '../../utils/sendEmail'
+import upload from '../../utils/uploadImage'
+import {keys} from '../../config/keys'
+
+const {check, validationResult} = require('express-validator')
+const router = express.Router()
+
 interface IRequest extends Request {
   req: {body: {password2: string}}
 }
 
-const {check, validationResult, body} = require('express-validator')
-const router = express.Router()
-
 router.post(
   '/register',
+  upload.single('avatar'),
   [
     check('firstName', 'First name is required')
       .not()
@@ -34,7 +38,6 @@ router.post(
       .bail()
       .custom((value: any, {req}: IRequest) => {
         if (value !== req.body.password2) {
-          // trow error if passwords do not match
           throw new Error("Passwords don't match")
         } else {
           return value
@@ -48,12 +51,14 @@ router.post(
       return res.status(400).json({errors: errors.array()})
     }
     const {firstName, lastName, email, password} = req.body
+    const image = req.file
+
     try {
       let user = await User.findOne({email})
 
       if (user) res.status(400).json({errors: [{msg: 'User already exists'}]})
 
-      user = new User({firstName, lastName, email, password})
+      user = new User({firstName, lastName, email, password, image})
       const salt = await bcrypt.genSalt(10)
       user.password = await bcrypt.hash(password, salt)
 

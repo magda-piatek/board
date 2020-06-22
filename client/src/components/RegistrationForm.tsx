@@ -12,20 +12,30 @@ import {
 import {userApi} from '../services/api'
 import {findError} from '../utils/Helpers'
 
+interface IUser {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  password2: string
+}
+
 const RegistrationForm = (props: any) => {
-  const [formData, setFormData] = useState({
+  const [formValues, setFormValues] = useState<IUser>({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     password2: '',
   })
-  const [errors, setErrors] = useState([])
 
-  const {firstName, lastName, email, password, password2} = formData
+  const [errors, setErrors] = useState([])
+  const [avatar, setAvatar] = useState<File | null>()
+
+  const {firstName, lastName, email, password, password2} = formValues
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setFormData({...formData, [e.target.name]: e.target.value})
+    setFormValues({...formValues, [e.target.name]: e.target.value})
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
@@ -33,13 +43,32 @@ const RegistrationForm = (props: any) => {
     e.preventDefault()
 
     try {
-      const newUser = {firstName, lastName, email, password, password2}
-      await axios.post(userApi().post, newUser)
+      const newUser: IUser | any = {
+        firstName,
+        lastName,
+        email,
+        password,
+        password2,
+      }
+
+      let formData = new FormData()
+
+      formData.append('avatar', avatar)
+
+      for (let key in newUser) {
+        formData.append(key, newUser[key])
+      }
+
+      await axios.post(userApi().post, formData)
 
       props.history.push('/')
     } catch (err) {
       setErrors(err.response.data.errors)
     }
+  }
+
+  const imageSelectedHandler = (event: any) => {
+    setAvatar(event.target.files[0])
   }
 
   return (
@@ -112,6 +141,8 @@ const RegistrationForm = (props: any) => {
               />
             </Grid>
           </Grid>
+          <label htmlFor="file-upload"></label>
+          <input id="file-upload" type="file" onChange={imageSelectedHandler} />
           <Button
             style={{marginTop: '15px'}}
             type="submit"
