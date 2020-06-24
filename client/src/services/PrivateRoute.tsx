@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {Redirect, Route, RouteProps} from 'react-router-dom'
 
-import {isAuthenticated} from './AuthService'
+import {getAuth} from './AuthService'
 
 interface PrivateRouteProps extends RouteProps {
   component?: any
@@ -9,7 +9,7 @@ interface PrivateRouteProps extends RouteProps {
 
 const PrivateRoute = (props: PrivateRouteProps) => {
   const {component: Component, ...rest} = props
-  const isAuth = isAuthenticated()
+  const isAuth = getAuth().isAuthenticated
 
   return (
     <Route

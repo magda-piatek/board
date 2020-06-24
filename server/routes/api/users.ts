@@ -15,6 +15,15 @@ interface IRequest extends Request {
   req: {body: {password2: string}}
 }
 
+router.get('/getMe', async (req: any, res: any) => {
+  const {
+    user: {id},
+  }: any = jwt.verify(req.headers.authorization, keys.jwtSecret)
+  let user = await User.findById(id)
+
+  res.json(user)
+})
+
 router.post(
   '/register',
   upload.single('avatar'),
@@ -66,7 +75,7 @@ router.post(
 
       jwt.sign(
         {user: user.id},
-        keys.secret,
+        keys.jwtSecret,
         {
           expiresIn: '1d',
         },

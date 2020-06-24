@@ -32,11 +32,9 @@ app.use('/confirmation', confirmation)
 app.use('/api/users', users)
 app.use('/api/auth', auth)
 
-if (process.env.NODE_ENV === 'production') {
-  app.get('*', (req: any, res: any) => {
-    res.sendFile(path.resolve('..', 'client', 'dist', 'index.html'))
-  })
-}
+app.get('*', (req: any, res: any) => {
+  res.sendFile(path.resolve('..', 'client', 'dist', 'index.html'))
+})
 
 app.listen(port, () => {
   console.log('server listening on port: %s', port)
