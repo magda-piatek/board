@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import axios from 'axios'
 
 import Navbar from './layout/navbar/Navbar'
@@ -7,15 +7,17 @@ import {getHeaders, userApi} from '../services/api'
 import {setErrors} from '../store/actions/errorAction'
 
 const Blayout = (props: any) => {
-  const headers = getHeaders()
+  const [user, setUser] = useState({})
 
+  const headers = getHeaders()
   useEffect(() => {
     try {
       const getMe = async () => {
         const apiClient = axios.create({
           headers,
         })
-        const res = await apiClient.get(userApi().getMe)
+        const result = await apiClient.get(userApi().getMe)
+        setUser(result.data)
       }
 
       getMe()
@@ -26,7 +28,7 @@ const Blayout = (props: any) => {
 
   return (
     <React.Fragment>
-      <Navbar {...props} />
+      <Navbar user={user} {...props} />
       {props.children}
     </React.Fragment>
   )

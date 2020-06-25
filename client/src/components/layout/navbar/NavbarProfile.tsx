@@ -21,14 +21,26 @@ const NavbarProfile = (props: any) => {
     dispatch(setAuth({token: null, isAuthenticated: false}))
     props.history.push('/')
   }
+
+  const {user} = props
+
   return (
     <div>
       <Button
         aria-controls="simple-menu"
         aria-haspopup="true"
         onClick={handleClick}
+        className="menu_button"
       >
-        Open Menu
+        {user.avatar && (
+          <img
+            className="img-rounded"
+            style={{height: '220px'}}
+            src={user.avatar.location}
+          />
+        )}
+
+        <span>{`${user.firstName} ${user.lastName}`}</span>
       </Button>
       <Menu
         id="simple-menu"

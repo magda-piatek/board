@@ -60,14 +60,14 @@ router.post(
       return res.status(400).json({errors: errors.array()})
     }
     const {firstName, lastName, email, password} = req.body
-    const image = req.file
+    const avatar = req.file
 
     try {
       let user = await User.findOne({email})
 
       if (user) res.status(400).json({errors: [{msg: 'User already exists'}]})
 
-      user = new User({firstName, lastName, email, password, image})
+      user = new User({firstName, lastName, email, password, avatar})
       const salt = await bcrypt.genSalt(10)
       user.password = await bcrypt.hash(password, salt)
 
