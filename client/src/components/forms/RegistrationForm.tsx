@@ -10,8 +10,8 @@ import {
   Container,
 } from '@material-ui/core'
 
-import {userApi} from '../services/api'
-import {findError} from '../utils/Helpers'
+import {userApi} from '../../services/api'
+import {findError} from '../../utils/Helpers'
 
 interface IUser {
   firstName: string

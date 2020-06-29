@@ -1,11 +1,12 @@
 button.menu_button span {
   color: white;
   padding-left: 7px;
+  font-size: 12px;
 }
 button.menu_button .img-rounded {
   border-radius: 50%;
-  height: 50px !important;
-  width: 50px;
+  height: 35px !important;
+  width: 30px;
 }
 
 /*# sourceMappingURL=App.css.map */

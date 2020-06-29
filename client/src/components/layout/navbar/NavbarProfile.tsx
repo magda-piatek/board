@@ -49,7 +49,9 @@ const NavbarProfile = (props: any) => {
         open={Boolean(open)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={() => props.history.push('/profile')}>
+          Profile
+        </MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleLogOut}>Logout</MenuItem>
       </Menu>

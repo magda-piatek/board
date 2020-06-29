@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken'
 import User from '../../models/User'
 import sendMail from '../../utils/sendEmail'
 import upload from '../../utils/uploadImage'
-import {keys} from '../../config/keys'
+import {keys} from '../../../config/keys'
 
 const {check, validationResult} = require('express-validator')
 const router = express.Router()

@@ -11,9 +11,9 @@ import {
   Container,
 } from '@material-ui/core'
 
-import {setAuth} from '../store/actions/authAction'
-import {loginApi} from '../services/api'
-import {findError} from '../utils/Helpers'
+import {setAuth} from '../../store/actions/authAction'
+import {loginApi} from '../../services/api'
+import {findError} from '../../utils/Helpers'
 
 const LoginForm = (props: any) => {
   const [formData, setFormData] = useState({

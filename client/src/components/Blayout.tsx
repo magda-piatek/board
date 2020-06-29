@@ -5,11 +5,14 @@ import axios from 'axios'
 import Navbar from './layout/navbar/Navbar'
 import {getHeaders, userApi} from '../services/api'
 import {setErrors} from '../store/actions/errorAction'
+import {BlayoutContext} from './BlayoutContext'
+import Components from './Components'
 
-const Blayout = (props: any) => {
+const Blayout = (props: any): JSX.Element => {
   const [user, setUser] = useState({})
 
   const headers = getHeaders()
+
   useEffect(() => {
     try {
       const getMe = async () => {
@@ -27,10 +30,10 @@ const Blayout = (props: any) => {
   }, [])
 
   return (
-    <React.Fragment>
-      <Navbar user={user} {...props} />
-      {props.children}
-    </React.Fragment>
+    <BlayoutContext.Provider value={user}>
+      <Navbar {...props} />
+      <Components {...props} />
+    </BlayoutContext.Provider>
   )
 }
 

@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs'
 
 import auth from '../../middleware/auth'
 import User from '../../models/User'
-import {keys} from '../../config/keys'
+import {keys} from '../../../config/keys'
 import {IRequest} from '../../interfaces'
 
 const jwtSecret = keys.jwtSecret
@@ -64,7 +64,7 @@ router.post(
         },
       }
 
-      jwt.sign(payload, jwtSecret, {expiresIn: 36000}, (err, token) => {
+      jwt.sign(payload, jwtSecret, {expiresIn: 3600}, (err, token) => {
         if (err) throw err
         res.json({token})
       })

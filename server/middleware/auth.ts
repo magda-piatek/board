@@ -1,7 +1,7 @@
-import {Request, Response, NextFunction} from 'express'
+import {Response, NextFunction} from 'express'
 import jwt from 'jsonwebtoken'
 
-import {keys} from '../config/keys'
+import {keys} from '../../config/keys'
 import {IRequest} from '../interfaces'
 
 export default (req: IRequest, res: Response, next: NextFunction) => {
@@ -10,7 +10,7 @@ export default (req: IRequest, res: Response, next: NextFunction) => {
   if (!token) res.status(401).json({msg: 'No token, authorization denied'})
 
   try {
-    const decoded = <any>jwt.verify(token, keys.secretJWT)
+    const decoded = <any>jwt.verify(token, keys.jwtSecret)
 
     req.user = decoded.user.id
 
