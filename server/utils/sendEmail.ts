@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 
-import {keys} from '../../config/keys'
+import {keys} from '../config/keys'
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',

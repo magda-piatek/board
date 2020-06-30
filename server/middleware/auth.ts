@@ -1,7 +1,7 @@
 import {Response, NextFunction} from 'express'
 import jwt from 'jsonwebtoken'
 
-import {keys} from '../../config/keys'
+import {keys} from '../config/keys'
 import {IRequest} from '../interfaces'
 
 export default (req: IRequest, res: Response, next: NextFunction) => {

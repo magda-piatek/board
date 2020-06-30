@@ -1,5 +1,5 @@
 import {Auth} from '../store/types/Auth'
-import {keys} from '../../../config/keys'
+import {keys} from '../../../server/config/keys'
 import {setAuth} from '../store/actions/authAction'
 
 import {useSelector, useDispatch} from 'react-redux'
@@ -15,7 +15,7 @@ export const getAuth = () => {
 
   const decoded = jwt.verify(token, keys.jwtSecret)
 
-  if (decoded.exp - Date.now() < 0) {
+  if (decoded.exp - Date.now() / 1000 < 0) {
     isAuthenticated = false
     dispatch(setAuth({token: null, isAuthenticated: false}))
   }

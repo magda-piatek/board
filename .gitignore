@@ -37,7 +37,7 @@ Thumbs.db
 
 # Ignore built ts files
 
-config/dev.ts
+server/config/dev.ts
 server/dist/**
 client/dist/**
 
