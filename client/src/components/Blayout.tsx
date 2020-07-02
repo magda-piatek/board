@@ -6,7 +6,6 @@ import Navbar from './layout/navbar/Navbar'
 import {getHeaders, userApi} from '../services/api'
 import {setErrors} from '../store/actions/errorAction'
 import {BlayoutContext} from './BlayoutContext'
-import Components from './Components'
 
 const Blayout = (props: any): JSX.Element => {
   const [user, setUser] = useState({})
@@ -32,7 +31,7 @@ const Blayout = (props: any): JSX.Element => {
   return (
     <BlayoutContext.Provider value={user}>
       <Navbar {...props} />
-      <Components {...props} />
+      {props.children}
     </BlayoutContext.Provider>
   )
 }

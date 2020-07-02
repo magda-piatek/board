@@ -7,8 +7,12 @@ export const getHeaders = () => {
   }
 }
 
-export const userApi = () => {
-  return {post: '/api/users/register', getMe: '/api/users/getMe'}
+export const userApi = (id?: String) => {
+  return {
+    post: '/api/users/register',
+    getMe: '/api/users/getMe',
+    getOne: '/api/users/' + id,
+  }
 }
 
 export const loginApi = () => {

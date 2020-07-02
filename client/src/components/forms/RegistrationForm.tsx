@@ -31,7 +31,6 @@ const RegistrationForm = (props: any) => {
   })
 
   const [errors, setErrors] = useState([])
-  const [avatar, setAvatar] = useState<File | null>()
 
   const {firstName, lastName, email, password, password2} = formValues
 
@@ -52,24 +51,12 @@ const RegistrationForm = (props: any) => {
         password2,
       }
 
-      let formData = new FormData()
-
-      formData.append('avatar', avatar)
-
-      for (let key in newUser) {
-        formData.append(key, newUser[key])
-      }
-
-      await axios.post(userApi().post, formData)
+      await axios.post(userApi().post, newUser)
 
       props.history.push('/')
     } catch (err) {
       setErrors(err.response.data.errors)
     }
-  }
-
-  const imageSelectedHandler = (event: any) => {
-    setAvatar(event.target.files[0])
   }
 
   return (
@@ -142,8 +129,7 @@ const RegistrationForm = (props: any) => {
               />
             </Grid>
           </Grid>
-          <label htmlFor="file-upload"></label>
-          <input id="file-upload" type="file" onChange={imageSelectedHandler} />
+
           <Button
             style={{marginTop: '15px'}}
             type="submit"

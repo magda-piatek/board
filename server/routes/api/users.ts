@@ -24,9 +24,31 @@ router.get('/getMe', async (req: any, res: any) => {
   res.json(user)
 })
 
+router.patch(
+  '/:id',
+  upload.single('avatar'),
+
+  async (req: any, res: any) => {
+    const {firstName, lastName} = req.body
+    const avatar = req.file
+
+    try {
+      let user = await User.findOneAndUpdate(req.param.id, {
+        firstName,
+        lastName,
+        avatar,
+      })
+
+      res.json(user)
+    } catch (err) {
+      console.log(err.message)
+      res.status(500).send('Server error')
+    }
+  }
+)
+
 router.post(
   '/register',
-  upload.single('avatar'),
   [
     check('firstName', 'First name is required')
       .not()
@@ -60,14 +82,13 @@ router.post(
       return res.status(400).json({errors: errors.array()})
     }
     const {firstName, lastName, email, password} = req.body
-    const avatar = req.file
 
     try {
       let user = await User.findOne({email})
 
       if (user) res.status(400).json({errors: [{msg: 'User already exists'}]})
 
-      user = new User({firstName, lastName, email, password, avatar})
+      user = new User({firstName, lastName, email, password})
       const salt = await bcrypt.genSalt(10)
       user.password = await bcrypt.hash(password, salt)
 
